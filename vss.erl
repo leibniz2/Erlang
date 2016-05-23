@@ -1,13 +1,13 @@
 -module(vss).
 -export([start/0, service/2, cast_radley/2, cast_rosal/2, tally/2, 
-	vote_cand1/1, vote_cand2/1, vote_tally/1, stop_serv/0, stop/1]).
+	vote_cand1/1, vote_cand2/1, stop_serv/0, stop/1]). %% add vote_tally/1
  
 start() ->
 	spawn(fun() -> vss:service(0, 0) end).
 
 vote_cand1(Pid) -> Pid ! radley.
 vote_cand2(Pid) -> Pid ! rosal.
-vote_tally(Pid)	-> Pid ! votes. 
+%vote_tally(Pid)	-> Pid ! votes. 
 stop(Pid)		-> Pid ! stop.
 
 service(RA, RO) ->
@@ -17,8 +17,8 @@ service(RA, RO) ->
 			vss:cast_radley(RA + 1, RO);
 		rosal ->
 			vss:cast_rosal(RA, RO + 1);
-		votes ->
-			vss:tally(RA, RO);
+		%votes ->
+		%	vss:tally(RA, RO);
 		stop ->
 			stop_serv()
 
