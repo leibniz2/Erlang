@@ -44,5 +44,5 @@ tally(RA, RO) ->
 	service(RA,RO).
 
 stop_serv() ->
-	io:format("Service stopped! ~n").
+	io:format("Service stopped!! ~n").
 
